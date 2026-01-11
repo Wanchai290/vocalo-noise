@@ -31,7 +31,7 @@ def generate(ids: list[int]):
 			waveform, sr = read_dir(str(A), B)
 			soundfile.write(os.path.join(OUTPUT_DIR, f"{str(A)}_{B}.wav"), normalize(waveform), sr)
 
-if __name__ == '__main__':
+def main():
 	try:
 		os.mkdir(DATASET_FOLDER)
 		os.mkdir(OUTPUT_DIR)
@@ -39,3 +39,6 @@ if __name__ == '__main__':
 		pass
 	# Librispeech data fusion
 	generate([84, 174])
+
+if __name__ == '__main__':
+	main()

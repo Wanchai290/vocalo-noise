@@ -28,9 +28,12 @@ def generate():
 
 
 
-if __name__ == '__main__':
+def main():
     try:
         os.mkdir(GENERATED_INPUT_DIRECTORY)
     except FileExistsError:
         pass
     generate()
+
+if __name__ == '__main__':
+    main()
