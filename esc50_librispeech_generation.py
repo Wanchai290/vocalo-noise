@@ -2,11 +2,10 @@ import librosa
 import soundfile
 import numpy as np
 import os
-from constants import OUTPUT_DIR, MAX_NOISE_FILES
+from constants import OUTPUT_DIR, MAX_NOISE_FILES, GENERATED_INPUT_DIRECTORY
 from util import normalize
 
 ESC50_DATASET_DIR = os.path.join("ESC-50-master", "audio")
-GENERATED_INPUT_DIRECTORY = os.path.join("dataset", "input")
 
 def generate():
     noise_files = os.listdir(ESC50_DATASET_DIR)
