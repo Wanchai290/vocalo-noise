@@ -2,16 +2,17 @@ import librosa
 import soundfile
 import numpy as np
 import os
-from constants import OUTPUT_DIR
+from constants import OUTPUT_DIR, MAX_NOISE_FILES
+from util import normalize
 
 ESC50_DATASET_DIR = os.path.join("ESC-50-master", "audio")
 GENERATED_INPUT_DIRECTORY = os.path.join("dataset", "input")
-MAX_INPUT_FILES = 2
+
 def generate():
     noise_files = os.listdir(ESC50_DATASET_DIR)
-    noise_files = noise_files[:MAX_INPUT_FILES] # limiting to not have a gazillion data generated
+    noise_files = noise_files[:MAX_NOISE_FILES] # limiting to not have a gazillion data generated
     # pre-load input files
-    noise_waveforms = [librosa.load(os.path.join(ESC50_DATASET_DIR, nf))[0] for nf in noise_files]
+    noise_waveforms = [normalize(librosa.load(os.path.join(ESC50_DATASET_DIR, nf))[0]) for nf in noise_files]
     
     speech_files = os.listdir(OUTPUT_DIR)
     for out_f in speech_files:

@@ -16,3 +16,7 @@ LibriSpeech/
 python3 librispeech_data_fusion.py
 python3 esc50_librispeech_generation.py
 ```
+
+## Dataset format
+If we refer to a single output file as `clean-audio.wav`, the format for each possible input file is `clean-audio.XXX.wav` where `XXX` is a noise sound value (with no meaning) only used to differentiate the fact
+that a specific noise is fused with the original file.

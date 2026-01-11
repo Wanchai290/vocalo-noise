@@ -2,9 +2,9 @@ import librosa
 import soundfile
 import numpy as np
 import os
-from constants import OUTPUT_DIR
+from constants import DATASET_FOLDER, OUTPUT_DIR
+from util import normalize
 """For each entry, generates a fused mp3"""
-
 # Librispeech directory format
 # A / [B1, .., Bn] / 'A-B-xxxx.flac'
 DATASET_PATH = os.path.join("LibriSpeech", "dev-clean")
@@ -27,9 +27,13 @@ def generate(ids: list[int]):
 		Bs = [s for s in os.listdir(os.path.join(DATASET_PATH, str(A)))]
 		for B in Bs:
 			waveform, sr = read_dir(str(A), B)
-			soundfile.write(os.path.join(OUTPUT_DIR, f"{str(A)}_{B}.wav"), waveform, sr)
+			soundfile.write(os.path.join(OUTPUT_DIR, f"{str(A)}_{B}.wav"), normalize(waveform), sr)
 
 if __name__ == '__main__':
-	os.mkdir(OUTPUT_DIR)
+	try:
+		os.mkdir(DATASET_FOLDER)
+		os.mkdir(OUTPUT_DIR)
+	except FileExistsError:
+		pass
 	# Librispeech data fusion
 	generate([84, 174])
