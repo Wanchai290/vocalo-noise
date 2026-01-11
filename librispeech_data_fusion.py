@@ -8,6 +8,8 @@ from util import normalize
 # Librispeech directory format
 # A / [B1, .., Bn] / 'A-B-xxxx.flac'
 DATASET_PATH = os.path.join("LibriSpeech", "dev-clean")
+if not os.path.exists("dataset"):
+	os.mkdir("dataset")
 
 def read_dir(A: str, B: str) -> list[float]:
 	directory = os.path.join(DATASET_PATH, A, B)
